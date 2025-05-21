@@ -1,0 +1,26 @@
+{
+  "name": "digital-signing-app",
+  "version": "1.0.0",
+  "description": "A digital signing application that provides functionality for creating, verifying, and managing digital signatures.",
+  "main": "src/app.ts",
+  "scripts": {
+    "start": "ts-node src/app.ts",
+    "build": "tsc",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "multer": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/multer": "^1.4.12",
+    "@types/node": "^16.11.7",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.4"
+  },
+  "author": "",
+  "license": "ISC"
+}
+
