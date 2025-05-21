@@ -1,0 +1,59 @@
+DigitalX-Sign allows developers to integrate e-signature capabilities directly into their applications, websites, and workflows. This means you can automate document sending, signing, and management processes, streamlining various business operations.
+
+Here's a breakdown of how it generally works and its key components:
+
+Core Concepts and Workflow:
+
+
+Before sending a document for signature, you first upload it to DigitalX Sign as a "transient document." This is a temporary file that remains available for a limited time (e.g., seven days).
+You use a POST request to the /transientDocuments endpoint, providing the file name, stream, and MIME type.
+The API returns a transientDocumentId which you'll use in subsequent calls.
+Creating Agreements or Web Forms:
+
+Agreements: To send a document to specific recipients for signing or approval, you create an "agreement."
+You'll typically use a POST request to the /agreements endpoint.
+You provide details like the transientDocumentId (referencing the uploaded document), recipient email addresses, signing order, and the desired signature type (e.g., e-sign or written).
+Agreements can be created in different states: DRAFT (to build incrementally), AUTHORING (to add or edit form fields), or IN_PROCESS (to send immediately).
+Web Forms (Widgets): For documents that many people need to access and sign (like waivers or signup sheets), you can create a "web form" or "widget."
+You upload a transient document and then use a POST request to the /widgets endpoint to create the hosted form.
+Web forms can also be in DRAFT, AUTHORING, or ACTIVE states.
+Adding Form Fields:
+
+DigitalX Sign allows you to define where signers will place their signatures, initials, dates, and other information.
+This can be done by:
+Text tags: Embedding specific text tags directly within your document (e.g., in a Word template before converting to PDF). DigitalX Sign automatically converts these into form fields.
+Authoring environment: Using the drag-and-drop editor provided by DigitalX Sign, either through its web UI or by generating an "authoring view" URL via the API that a user can access to place fields.
+API calls: Programmatically defining the position, size, and properties of form fields using API requests.
+Sending for Signature and Tracking Status:
+
+Once an agreement or web form is set up, you can initiate the signing process.
+DigitalX Sign handles sending notifications to signers (usually via email) and guiding them through the signing process.
+You can monitor the status of agreements in real-time by:
+Webhooks: The recommended method for real-time updates. You provide a webhook URL, and DigitalX Sign sends event notifications (e.g., when a document is viewed, signed, or declined) to your application.
+Polling: Periodically making GET requests to the /agreements/{agreementId} endpoint to retrieve the current status.
+Retrieving Signed Documents and Audit Trails:
+
+Once an agreement is completed by all signers, your application can download the final, signed PDF document using API calls.
+DigitalX Sign also generates a detailed audit trail for each transaction, providing a comprehensive record of all events related to the agreement, which can also be retrieved via the API for compliance purposes.
+Key API Features and Use Cases:
+
+Document Management: Uploading, sending, tracking, and retrieving documents.
+Customizable Workflows: Defining signing order, parallel signing, approval flows, and more.
+Real-time Updates: Using webhooks to receive instant notifications on document status changes.
+Bulk Sending: Sending the same document to multiple recipients efficiently.
+Embedded Signing: Embedding the signing UI directly into your application so users don't have to leave your platform.
+Templates and Library Documents: Creating reusable templates for frequently used documents to streamline the sending process.
+Prefilling Data: Merging data from your application into document fields before sending them for signature.
+Advanced Features: Digital signatures, identity verification methods (e.g., phone authentication, government ID), and electronic seals.
+Typical Integration Steps:
+
+Get a Developer Account: Sign up for an DigitalX  Sign developer account.
+Create an Application: Register your application in the DigitalX Sign web UI to get API credentials (Client ID and Client Secret).
+Configure OAuth: Set up OAuth 2.0 to securely obtain access tokens.
+Implement API Calls: Use the DigitalX Sign REST APIs to implement your desired workflow:
+Upload documents.
+Create agreements or web forms.
+Specify recipients and form fields.
+Send documents for signature.
+Monitor status using webhooks or polling.
+Download signed documents and audit reports
